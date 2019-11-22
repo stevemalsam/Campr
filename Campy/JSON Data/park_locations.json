@@ -1,0 +1,51 @@
+[
+    {
+        "name": "Old Faithful",
+        "coordinates": {
+            "longitude": -110.82805556,
+            "latitude": 44.46027778
+        },
+    },
+    {
+        "name": "Mammoth Hot Springs",
+        "coordinates": {
+            "longitude": -110.70083333,
+            "latitude": 44.97611111
+        }
+    },
+    {
+        "name": "East Entrance",
+        "coordinates": {
+            "longitude": -110.00361111,
+            "latitude": 44.48833333
+        }
+    },
+    {
+        "name": "North Entrance",
+        "coordinates": {
+            "longitude": -110.70861111,
+            "latitude": 45.02944444
+        }
+    },
+    {
+        "name": "Northeast Entrance",
+        "coordinates": {
+            "longitude": -110.00111111,
+            "latitude": 45.00333333
+        }
+    },
+    {
+        "name": "South Entrance",
+        "coordinates": {
+            "longitude": -110.66444444,
+            "latitude": 44.13222222
+        }
+    },
+    {
+        "name": "West Entrance",
+        "coordinates": {
+            "longitude": -111.09416667,
+            "latitude": 44.65833333
+        }
+    }
+]

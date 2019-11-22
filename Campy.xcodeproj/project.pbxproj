@@ -15,6 +15,7 @@
 		0A7C6C852384F73C006D78BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A7C6C832384F73C006D78BD /* LaunchScreen.storyboard */; };
 		0A7C6C902384F73C006D78BD /* CampyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7C6C8F2384F73C006D78BD /* CampyTests.swift */; };
 		0A7C6C9B2384F73C006D78BD /* CampyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7C6C9A2384F73C006D78BD /* CampyUITests.swift */; };
+		0A7C6CAB2385092F006D78BD /* park_locations.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A7C6CAA2385092F006D78BD /* park_locations.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		0A7C6C962384F73C006D78BD /* CampyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CampyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A7C6C9A2384F73C006D78BD /* CampyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampyUITests.swift; sourceTree = "<group>"; };
 		0A7C6C9C2384F73C006D78BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0A7C6CAA2385092F006D78BD /* park_locations.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = park_locations.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 		0A7C6C772384F73B006D78BD /* Campy */ = {
 			isa = PBXGroup;
 			children = (
+				0A7C6CA9238508FE006D78BD /* JSON Data */,
 				0A7C6C782384F73B006D78BD /* AppDelegate.swift */,
 				0A7C6C7A2384F73B006D78BD /* SceneDelegate.swift */,
 				0A7C6C7C2384F73B006D78BD /* ViewController.swift */,
@@ -126,6 +129,14 @@
 				0A7C6C9C2384F73C006D78BD /* Info.plist */,
 			);
 			path = CampyUITests;
+			sourceTree = "<group>";
+		};
+		0A7C6CA9238508FE006D78BD /* JSON Data */ = {
+			isa = PBXGroup;
+			children = (
+				0A7C6CAA2385092F006D78BD /* park_locations.json */,
+			);
+			path = "JSON Data";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,6 +243,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A7C6CAB2385092F006D78BD /* park_locations.json in Resources */,
 				0A7C6C852384F73C006D78BD /* LaunchScreen.storyboard in Resources */,
 				0A7C6C822384F73C006D78BD /* Assets.xcassets in Resources */,
 				0A7C6C802384F73B006D78BD /* Main.storyboard in Resources */,
