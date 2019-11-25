@@ -16,6 +16,7 @@
 		0A7C6C902384F73C006D78BD /* CampyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7C6C8F2384F73C006D78BD /* CampyTests.swift */; };
 		0A7C6C9B2384F73C006D78BD /* CampyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7C6C9A2384F73C006D78BD /* CampyUITests.swift */; };
 		0A7C6CAB2385092F006D78BD /* park_locations.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A7C6CAA2385092F006D78BD /* park_locations.json */; };
+		0A7C6CAD23889E3F006D78BD /* LandmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7C6CAC23889E3F006D78BD /* LandmarkViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		0A7C6C9A2384F73C006D78BD /* CampyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampyUITests.swift; sourceTree = "<group>"; };
 		0A7C6C9C2384F73C006D78BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A7C6CAA2385092F006D78BD /* park_locations.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = park_locations.json; sourceTree = "<group>"; };
+		0A7C6CAC23889E3F006D78BD /* LandmarkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				0A7C6C812384F73C006D78BD /* Assets.xcassets */,
 				0A7C6C832384F73C006D78BD /* LaunchScreen.storyboard */,
 				0A7C6C862384F73C006D78BD /* Info.plist */,
+				0A7C6CAC23889E3F006D78BD /* LandmarkViewController.swift */,
 			);
 			path = Campy;
 			sourceTree = "<group>";
@@ -271,6 +274,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A7C6CAD23889E3F006D78BD /* LandmarkViewController.swift in Sources */,
 				0A7C6C7D2384F73B006D78BD /* ViewController.swift in Sources */,
 				0A7C6C792384F73B006D78BD /* AppDelegate.swift in Sources */,
 				0A7C6C7B2384F73B006D78BD /* SceneDelegate.swift in Sources */,

@@ -18,10 +18,11 @@ struct Coordinates: Codable {
     var longitude: Double
 }
 
-struct Campsite: Decodable {
-    let name: String
+class Campsite: NSObject, Decodable, MKAnnotation {
+    let title: String?
+    let about: String
     let coordinates: Coordinates
-    var locationCoordinate: CLLocationCoordinate2D {
+    var coordinate: CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: self.coordinates.latitude, longitude: self.coordinates.longitude)
     }
 }
@@ -37,8 +38,19 @@ class ViewController: UIViewController {
         let yellowstoneRegion = MKCoordinateRegion(center: YELLOWSTONE_COORDINATES, span: YELLOWSTONE_SPAN)
         
         self.map.setRegion(yellowstoneRegion, animated: false)
+        self.map.register(MKMarkerAnnotationView.self, forAnnotationViewWithReuseIdentifier: "PIN")
         self.loadLandmarks()
-        self.addCampsites()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard case segue.identifier = "Detail",
+            let annotationView = sender as? MKMarkerAnnotationView,
+            let campsite = annotationView.annotation as? Campsite,
+            let detailVC = segue.destination as? LandmarkViewController else {
+            return
+        }
+        
+        detailVC.campsite = campsite
     }
     
     func loadLandmarks() {
@@ -48,18 +60,10 @@ class ViewController: UIViewController {
                 let decoder = JSONDecoder()
                 let sites = try decoder.decode([Campsite].self, from: data)
                 self.campsites = sites
+                self.map.addAnnotations(self.campsites)
             } catch {
                 
             }
-        }
-    }
-    
-    func addCampsites() {
-        for campsite in self.campsites {
-            let annotation = MKPointAnnotation()
-            annotation.title = campsite.name
-            annotation.coordinate = campsite.locationCoordinate
-            self.map.addAnnotation(annotation)
         }
     }
 }
@@ -68,5 +72,24 @@ extension ViewController:MKMapViewDelegate {
     func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
         print("Visible Region: \(mapView.region)")
     }
-}
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard annotation is Campsite else { return nil }
 
+        guard let pinView = mapView.dequeueReusableAnnotationView(withIdentifier: "PIN", for: annotation) as? MKMarkerAnnotationView else {
+            fatalError("Unable to deque proper Annotation view")
+        }
+
+//        pinView.image = #imageLiteral(resourceName: "campIcon")
+        pinView.canShowCallout = true
+        pinView.calloutOffset = CGPoint(x: -5, y: -5)
+        pinView.leftCalloutAccessoryView = UIImageView(image: #imageLiteral(resourceName: "campIcon"))
+        pinView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        return pinView
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView,
+        calloutAccessoryControlTapped control: UIControl) {
+      self.performSegue(withIdentifier: "Detail", sender: view)
+    }
+}

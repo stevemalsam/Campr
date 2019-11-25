@@ -34,11 +34,56 @@
                     <navigationItem key="navigationItem" id="pY9-l1-gJ1"/>
                     <connections>
                         <outlet property="map" destination="ct8-mO-AGz" id="gm2-Gd-hBB"/>
+                        <segue destination="dcj-Vt-BPR" kind="showDetail" identifier="Detail" id="7gN-bb-QVt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="827.536231884058" y="132.58928571428572"/>
+        </scene>
+        <!--Landmark View Controller-->
+        <scene sceneID="Nzb-5x-vaD">
+            <objects>
+                <viewController id="dcj-Vt-BPR" customClass="LandmarkViewController" customModule="Campy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="F2Q-A3-Hjt">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="9sz-OU-z89">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Old Faithful" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sk5-OM-L4g">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="404"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Fm-zW-tuS">
+                                        <rect key="frame" x="0.0" y="404" width="414" height="404"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="nPs-ja-al8" firstAttribute="bottom" secondItem="9sz-OU-z89" secondAttribute="bottom" id="3me-Qm-FBg"/>
+                            <constraint firstItem="9sz-OU-z89" firstAttribute="leading" secondItem="nPs-ja-al8" secondAttribute="leading" id="DGH-8G-E5j"/>
+                            <constraint firstItem="9sz-OU-z89" firstAttribute="top" secondItem="nPs-ja-al8" secondAttribute="top" id="K8g-nF-Bdy"/>
+                            <constraint firstItem="nPs-ja-al8" firstAttribute="trailing" secondItem="9sz-OU-z89" secondAttribute="trailing" id="kWW-8w-iXC"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="nPs-ja-al8"/>
+                    </view>
+                    <connections>
+                        <outlet property="about" destination="6Fm-zW-tuS" id="z5N-4N-VvI"/>
+                        <outlet property="name" destination="Sk5-OM-L4g" id="U84-on-8yu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lco-iV-x3a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1790" y="133"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cjP-ho-ErG">
