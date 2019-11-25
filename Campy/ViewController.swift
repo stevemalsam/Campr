@@ -27,10 +27,10 @@ class Campsite: NSObject, Decodable, MKAnnotation {
     }
 }
 
-class CampsiteView: MKAnnotationView {
+class CampsiteView: MKMarkerAnnotationView {
   override var annotation: MKAnnotation? {
     willSet {
-      image = #imageLiteral(resourceName: "campIcon")
+      glyphImage = #imageLiteral(resourceName: "campIcon")
     }
   }
 }
@@ -46,6 +46,14 @@ class Camper: NSObject, MKAnnotation {
     }
 }
 
+class CamperView: MKMarkerAnnotationView {
+    override var annotation: MKAnnotation? {
+        willSet {
+            glyphImage = #imageLiteral(resourceName: "camperIcon")
+        }
+    }
+}
+
 class ViewController: UIViewController {
     @IBOutlet weak var map: MKMapView!
     
@@ -58,7 +66,7 @@ class ViewController: UIViewController {
         
         self.map.setRegion(yellowstoneRegion, animated: false)
         self.map.register(CampsiteView.self, forAnnotationViewWithReuseIdentifier: "PIN")
-        self.map.register(MKMarkerAnnotationView.self, forAnnotationViewWithReuseIdentifier: "CAMPER")
+        self.map.register(CamperView.self, forAnnotationViewWithReuseIdentifier: "CAMPER")
         self.loadLandmarks()
     }
     
@@ -142,14 +150,13 @@ extension ViewController:MKMapViewDelegate {
                 fatalError("Unable to deque proper Annotation view")
             }
 
-            pinView.image = #imageLiteral(resourceName: "campIcon")
             pinView.canShowCallout = true
             pinView.calloutOffset = CGPoint(x: -5, y: -5)
             pinView.leftCalloutAccessoryView = UIImageView(image: #imageLiteral(resourceName: "campIcon"))
             pinView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
             return pinView
         } else if let annotation = annotation as? Camper {
-            guard let pinView = mapView.dequeueReusableAnnotationView(withIdentifier: "CAMPER", for: annotation) as? MKMarkerAnnotationView else {
+            guard let pinView = mapView.dequeueReusableAnnotationView(withIdentifier: "CAMPER", for: annotation) as? CamperView else {
                 fatalError("Unable to deque proper Annotation view")
             }
 
