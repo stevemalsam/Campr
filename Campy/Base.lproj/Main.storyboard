@@ -49,30 +49,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="9sz-OU-z89">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Old Faithful" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sk5-OM-L4g">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="404"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Fm-zW-tuS">
-                                        <rect key="frame" x="0.0" y="404" width="414" height="404"/>
-                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Old Faithful" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sk5-OM-L4g">
+                                <rect key="frame" x="16" y="16" width="382" height="20.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Fm-zW-tuS">
+                                <rect key="frame" x="16" y="44.5" width="382" height="20.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="nPs-ja-al8" firstAttribute="bottom" secondItem="9sz-OU-z89" secondAttribute="bottom" id="3me-Qm-FBg"/>
-                            <constraint firstItem="9sz-OU-z89" firstAttribute="leading" secondItem="nPs-ja-al8" secondAttribute="leading" id="DGH-8G-E5j"/>
-                            <constraint firstItem="9sz-OU-z89" firstAttribute="top" secondItem="nPs-ja-al8" secondAttribute="top" id="K8g-nF-Bdy"/>
-                            <constraint firstItem="nPs-ja-al8" firstAttribute="trailing" secondItem="9sz-OU-z89" secondAttribute="trailing" id="kWW-8w-iXC"/>
+                            <constraint firstItem="6Fm-zW-tuS" firstAttribute="leading" secondItem="Sk5-OM-L4g" secondAttribute="leading" id="Hce-GF-KDN"/>
+                            <constraint firstItem="6Fm-zW-tuS" firstAttribute="trailing" secondItem="Sk5-OM-L4g" secondAttribute="trailing" id="MEO-iJ-hfO"/>
+                            <constraint firstItem="Sk5-OM-L4g" firstAttribute="leading" secondItem="nPs-ja-al8" secondAttribute="leading" constant="16" id="Pal-dH-KRY"/>
+                            <constraint firstItem="6Fm-zW-tuS" firstAttribute="top" secondItem="Sk5-OM-L4g" secondAttribute="bottom" constant="8" id="Tkv-un-Cc5"/>
+                            <constraint firstItem="nPs-ja-al8" firstAttribute="trailing" secondItem="Sk5-OM-L4g" secondAttribute="trailing" constant="16" id="XRd-gE-2qs"/>
+                            <constraint firstItem="Sk5-OM-L4g" firstAttribute="top" secondItem="nPs-ja-al8" secondAttribute="top" constant="16" id="bP2-aT-9jx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="nPs-ja-al8"/>
                     </view>
