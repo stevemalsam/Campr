@@ -38,11 +38,17 @@ class CampsiteView: MKMarkerAnnotationView {
 
 class Camper: NSObject, MKAnnotation {
     let title: String?
+    let phoneNumber: String
     let coordinate: CLLocationCoordinate2D
     
-    init(title: String = "Camper", coordinate: CLLocationCoordinate2D) {
+    init(title: String = "Camper", phoneNumber: String = "(949)867-5309", coordinate: CLLocationCoordinate2D) {
         self.title = title
+        self.phoneNumber = phoneNumber
         self.coordinate = coordinate
+    }
+    
+    var subtitle: String? {
+        return self.phoneNumber
     }
 }
 
@@ -63,17 +69,6 @@ class CamperView: MKMarkerAnnotationView {
     }
 }
 
-//class CamperClusterView: MKAnnotationView {
-//    override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
-//        super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-//        collisionMode = .circle
-//    }
-//
-//    required init?(coder aDecoder: NSCoder) {
-//        fatalError("\(#function) not implemented.")
-//    }
-//}
-
 class ViewController: UIViewController {
     @IBOutlet weak var map: MKMapView!
     
@@ -87,7 +82,6 @@ class ViewController: UIViewController {
         self.map.setRegion(yellowstoneRegion, animated: false)
         self.map.register(CampsiteView.self, forAnnotationViewWithReuseIdentifier: "PIN")
         self.map.register(CamperView.self, forAnnotationViewWithReuseIdentifier: "CAMPER")
-//        self.map.register(CamperClusterView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
         self.loadLandmarks()
     }
     
