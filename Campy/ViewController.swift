@@ -27,6 +27,25 @@ class Campsite: NSObject, Decodable, MKAnnotation {
     }
 }
 
+class CampsiteView: MKAnnotationView {
+  override var annotation: MKAnnotation? {
+    willSet {
+      image = #imageLiteral(resourceName: "campIcon")
+    }
+  }
+}
+
+
+class Camper: NSObject, MKAnnotation {
+    let title: String?
+    let coordinate: CLLocationCoordinate2D
+    
+    init(title: String = "Camper", coordinate: CLLocationCoordinate2D) {
+        self.title = title
+        self.coordinate = coordinate
+    }
+}
+
 class ViewController: UIViewController {
     @IBOutlet weak var map: MKMapView!
     
@@ -38,7 +57,8 @@ class ViewController: UIViewController {
         let yellowstoneRegion = MKCoordinateRegion(center: YELLOWSTONE_COORDINATES, span: YELLOWSTONE_SPAN)
         
         self.map.setRegion(yellowstoneRegion, animated: false)
-        self.map.register(MKMarkerAnnotationView.self, forAnnotationViewWithReuseIdentifier: "PIN")
+        self.map.register(CampsiteView.self, forAnnotationViewWithReuseIdentifier: "PIN")
+        self.map.register(MKMarkerAnnotationView.self, forAnnotationViewWithReuseIdentifier: "CAMPER")
         self.loadLandmarks()
     }
     
@@ -61,10 +81,53 @@ class ViewController: UIViewController {
                 let sites = try decoder.decode([Campsite].self, from: data)
                 self.campsites = sites
                 self.map.addAnnotations(self.campsites)
+                
+                var campers: [Camper] = []
+                for _ in 0...10 {
+                    let coordinate = self.generateRandomCoordinates(min: 8000, max: 8000)
+                    let camper = Camper(coordinate: coordinate)
+                    campers.append(camper)
+                }
+                self.map.addAnnotations(campers)
+                
             } catch {
                 
             }
         }
+    }
+    
+    func generateRandomCoordinates(min: UInt32, max: UInt32)-> CLLocationCoordinate2D {
+        //Get the Current Location's longitude and latitude
+        let currentLong = YELLOWSTONE_COORDINATES.longitude
+        let currentLat = YELLOWSTONE_COORDINATES.latitude
+
+        //1 KiloMeter = 0.00900900900901° So, 1 Meter = 0.00900900900901 / 1000
+        let meterCord = 0.00900900900901 / 1000
+
+        //Generate random Meters between the maximum and minimum Meters
+        let randomMeters = UInt(arc4random_uniform(max) + min)
+
+        //then Generating Random numbers for different Methods
+        let randomPM = arc4random_uniform(6)
+
+        //Then we convert the distance in meters to coordinates by Multiplying the number of meters with 1 Meter Coordinate
+        let metersCordN = meterCord * Double(randomMeters)
+
+        //here we generate the last Coordinates
+        if randomPM == 0 {
+            return CLLocationCoordinate2D(latitude: currentLat + metersCordN, longitude: currentLong + metersCordN)
+        }else if randomPM == 1 {
+            return CLLocationCoordinate2D(latitude: currentLat - metersCordN, longitude: currentLong - metersCordN)
+        }else if randomPM == 2 {
+            return CLLocationCoordinate2D(latitude: currentLat + metersCordN, longitude: currentLong - metersCordN)
+        }else if randomPM == 3 {
+            return CLLocationCoordinate2D(latitude: currentLat - metersCordN, longitude: currentLong + metersCordN)
+        }else if randomPM == 4 {
+            return CLLocationCoordinate2D(latitude: currentLat, longitude: currentLong - metersCordN)
+        }else {
+            return CLLocationCoordinate2D(latitude: currentLat - metersCordN, longitude: currentLong)
+        }
+
     }
 }
 
@@ -74,22 +137,33 @@ extension ViewController:MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        guard annotation is Campsite else { return nil }
+        if let annotation = annotation as? Campsite {
+            guard let pinView = mapView.dequeueReusableAnnotationView(withIdentifier: "PIN", for: annotation) as? CampsiteView else {
+                fatalError("Unable to deque proper Annotation view")
+            }
 
-        guard let pinView = mapView.dequeueReusableAnnotationView(withIdentifier: "PIN", for: annotation) as? MKMarkerAnnotationView else {
-            fatalError("Unable to deque proper Annotation view")
+            pinView.image = #imageLiteral(resourceName: "campIcon")
+            pinView.canShowCallout = true
+            pinView.calloutOffset = CGPoint(x: -5, y: -5)
+            pinView.leftCalloutAccessoryView = UIImageView(image: #imageLiteral(resourceName: "campIcon"))
+            pinView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            return pinView
+        } else if let annotation = annotation as? Camper {
+            guard let pinView = mapView.dequeueReusableAnnotationView(withIdentifier: "CAMPER", for: annotation) as? MKMarkerAnnotationView else {
+                fatalError("Unable to deque proper Annotation view")
+            }
+
+            pinView.canShowCallout = true
+            pinView.calloutOffset = CGPoint(x: -5, y: -5)
+            pinView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            return pinView
         }
-
-//        pinView.image = #imageLiteral(resourceName: "campIcon")
-        pinView.canShowCallout = true
-        pinView.calloutOffset = CGPoint(x: -5, y: -5)
-        pinView.leftCalloutAccessoryView = UIImageView(image: #imageLiteral(resourceName: "campIcon"))
-        pinView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-        return pinView
+        
+        return nil
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView,
         calloutAccessoryControlTapped control: UIControl) {
-      self.performSegue(withIdentifier: "Detail", sender: view)
+//      self.performSegue(withIdentifier: "Detail", sender: view)
     }
 }
