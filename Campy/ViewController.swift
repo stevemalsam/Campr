@@ -52,7 +52,27 @@ class CamperView: MKMarkerAnnotationView {
             glyphImage = #imageLiteral(resourceName: "camperIcon")
         }
     }
+    
+    override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
+        super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
+        self.clusteringIdentifier = "CamperCluster"
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
 }
+
+//class CamperClusterView: MKAnnotationView {
+//    override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
+//        super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
+//        collisionMode = .circle
+//    }
+//
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("\(#function) not implemented.")
+//    }
+//}
 
 class ViewController: UIViewController {
     @IBOutlet weak var map: MKMapView!
@@ -67,6 +87,7 @@ class ViewController: UIViewController {
         self.map.setRegion(yellowstoneRegion, animated: false)
         self.map.register(CampsiteView.self, forAnnotationViewWithReuseIdentifier: "PIN")
         self.map.register(CamperView.self, forAnnotationViewWithReuseIdentifier: "CAMPER")
+//        self.map.register(CamperClusterView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
         self.loadLandmarks()
     }
     
@@ -92,7 +113,7 @@ class ViewController: UIViewController {
                 
                 var campers: [Camper] = []
                 for _ in 0...10 {
-                    let coordinate = self.generateRandomCoordinates(min: 8000, max: 8000)
+                    let coordinate = self.generateRandomCoordinates(min: 0, max: 100000)
                     let camper = Camper(coordinate: coordinate)
                     campers.append(camper)
                 }
@@ -171,6 +192,8 @@ extension ViewController:MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView,
         calloutAccessoryControlTapped control: UIControl) {
-//      self.performSegue(withIdentifier: "Detail", sender: view)
+        if let view = view as? CampsiteView {
+            self.performSegue(withIdentifier: "Detail", sender: view)
+        }
     }
 }
