@@ -13,12 +13,11 @@ import UIKit
 let YELLOWSTONE_COORDINATES = CLLocationCoordinate2DMake(44.43, -110.52)
 let YELLOWSTONE_SPAN = MKCoordinateSpan(latitudeDelta: 2, longitudeDelta: 1.2)
 
-
-
 class ViewController: UIViewController {
     @IBOutlet weak var map: MKMapView!
     
     private var campsites = [Campsite]()
+    private var campers = [Camper]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +28,11 @@ class ViewController: UIViewController {
         self.map.register(CampsiteView.self, forAnnotationViewWithReuseIdentifier: "PIN")
         self.map.register(CamperView.self, forAnnotationViewWithReuseIdentifier: "CAMPER")
         self.loadLandmarks()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.setupCamperTimer()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -51,11 +55,10 @@ class ViewController: UIViewController {
                 self.campsites = sites
                 self.map.addAnnotations(self.campsites)
                 
-                var campers: [Camper] = []
                 for _ in 0...10 {
                     let coordinate = self.generateRandomCoordinates(min: 0, max: 100000)
                     let camper = Camper(coordinate: coordinate)
-                    campers.append(camper)
+                    self.campers.append(camper)
                 }
                 self.map.addAnnotations(campers)
                 
@@ -96,7 +99,26 @@ class ViewController: UIViewController {
         }else {
             return CLLocationCoordinate2D(latitude: currentLat - metersCordN, longitude: currentLong)
         }
-
+    }
+    
+    @objc func setupCamperTimer() {
+        // setup to delay 3 seconds
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) { [weak self] in
+            guard let self = self else {
+                return
+            }
+            
+            self.map.removeAnnotations(self.campers)
+            self.campers.removeFirst(5)
+            for _ in 1...5 {
+                let coordinate = self.generateRandomCoordinates(min: 0, max: 100000)
+                let camper = Camper(coordinate: coordinate)
+                self.campers.append(camper)
+            }
+            
+            self.map.addAnnotations(self.campers)
+            self.perform(#selector(self.setupCamperTimer))
+        }
     }
 }
 
